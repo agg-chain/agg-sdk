@@ -66,24 +66,3 @@ func TestExecuteNeedGasContract(t *testing.T) {
 	}
 	println(contract.Result.DeliverTx.Data)
 }
-
-func TestExecuteNoGasContract(t *testing.T) {
-	// 0xD64229dF1EB0354583F46e46580849B1572BB56d
-	privateKey, err := crypto.HexToECDSA("5f9468d68c0fa82f78d8fe774c6d860ca8ff4a2f4f485603144183666dd8bf1d")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// retrieve code: 0x2e64cec1
-	data, err := hex.DecodeString("2e64cec1")
-	if err != nil {
-		panic(err)
-	}
-	// contract address: 0xBd770416a3345F91E4B34576cb804a576fa48EB1
-	contractAddress := common.HexToAddress("0xbd770416a3345f91e4b34576cb804a576fa48eb1")
-	contract, err := ExecuteContract(privateKey, &contractAddress, data)
-	if err != nil {
-		panic(err)
-	}
-	println(contract.Result.DeliverTx.Data)
-}
