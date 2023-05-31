@@ -5,6 +5,7 @@ import (
 	"agg-sdk/sdkconfig"
 	"agg-sdk/util"
 	"crypto/ecdsa"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -86,5 +87,9 @@ func Transfer(privateKey *ecdsa.PrivateKey, toAddress *common.Address, value *bi
 		return "", err
 	}
 
-	return broadcastResponse.Result.Hash, nil
+	decoded, err := base64.StdEncoding.DecodeString(broadcastResponse.Result.DeliverTx.Data.(string))
+	if err != nil {
+		return "", err
+	}
+	return hexutil.Encode(decoded), nil
 }

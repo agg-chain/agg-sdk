@@ -57,13 +57,21 @@ func invokeContract(privateKey *ecdsa.PrivateKey, toAddress *common.Address, dat
 		return nil, err
 	}
 
-	res := util.Get(fmt.Sprintf("%s/broadcast_tx_commit?tx=\""+txDataHex+"\"", sdkconfig.RpcUrl))
-	broadcastResponse := model.BroadcastTxCommitResponse{}
-	err = json.Unmarshal([]byte(res), &broadcastResponse)
+	broadcastResponse, err := BroadcastTx(txDataHex)
 	if err != nil {
 		return nil, err
 	}
 
+	return broadcastResponse, nil
+}
+
+func BroadcastTx(txDataHex string) (*model.BroadcastTxCommitResponse, error) {
+	res := util.Get(fmt.Sprintf("%s/broadcast_tx_commit?tx=\""+txDataHex+"\"", sdkconfig.RpcUrl))
+	broadcastResponse := model.BroadcastTxCommitResponse{}
+	err := json.Unmarshal([]byte(res), &broadcastResponse)
+	if err != nil {
+		return nil, err
+	}
 	return &broadcastResponse, nil
 }
 
