@@ -43,7 +43,7 @@ func main() {
 			return
 		}
 
-		resultHexForEvm := ""
+		var resultHexForEvm interface{}
 		switch request.Method {
 		case "net_version":
 			resultHexForEvm = sdkconfig.ChainId.String()
@@ -72,6 +72,18 @@ func main() {
 				return
 			}
 			resultHexForEvm = fmt.Sprintf("0x%X", balance)
+			break
+		case "agg_getTx":
+			txs, err := evmsdk.GetTx(request.Params[0].(string), request.Params[1].(string), request.Params[2].(string))
+			if err != nil {
+				return
+			}
+			var resultTx []*model.TxDetailsInfo
+			err = json.Unmarshal([]byte(txs), &resultTx)
+			if err != nil {
+				return
+			}
+			resultHexForEvm = resultTx
 			break
 		}
 

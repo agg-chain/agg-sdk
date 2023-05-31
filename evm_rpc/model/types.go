@@ -69,3 +69,13 @@ type BroadcastTxCommitResponse struct {
 		Height string `json:"height"`
 	} `json:"result"`
 }
+
+type TxDetailsInfo struct {
+	Id       int64  `json:"id,omitempty"`
+	TxHash   string `json:"tx_hash,omitempty"`
+	TxFrom   string `json:"tx_from,omitempty"`
+	TxTo     string `json:"tx_to,omitempty"`
+	RawData  string `json:"raw_data,omitempty"`
+	TxValue  string `json:"tx_value,omitempty"`
+	TxHeight int32  `json:"tx_height,omitempty"`
+}

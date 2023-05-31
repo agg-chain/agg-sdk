@@ -37,6 +37,14 @@ func GetBalance(address string) (*big.Int, error) {
 	return balance, nil
 }
 
+func GetTx(address, start, end string) (string, error) {
+	decoded, err := abciQuery("get_tx=" + address + "_" + start + "_" + end)
+	if err != nil {
+		return "", err
+	}
+	return string(decoded), nil
+}
+
 func Transfer(privateKey *ecdsa.PrivateKey, toAddress *common.Address, value *big.Int) (string, error) {
 
 	nonce, err := GetNonce(GetAddressHex(privateKey))
