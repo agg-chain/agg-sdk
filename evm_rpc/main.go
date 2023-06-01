@@ -11,10 +11,11 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
 var (
-	evmRpcPort = 8080
+	evmRpcPort = os.Getenv("EVM_RPC_PORT")
 )
 
 func main() {
@@ -44,8 +45,16 @@ func main() {
 		}
 
 		var resultHexForEvm interface{}
+		println("Request method: " + request.Method)
 		switch request.Method {
+		case "eth_gasPrice":
+			resultHexForEvm = "0x0"
+		case "eth_blockNumber":
+			resultHexForEvm = "0x0"
+		case "eth_getBlockByNumber":
+			break
 		case "net_version":
+		case "eth_chainId":
 			resultHexForEvm = sdkconfig.ChainId.String()
 			break
 		case "eth_sendRawTransaction":
