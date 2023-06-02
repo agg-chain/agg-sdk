@@ -78,4 +78,11 @@ type TxDetailsInfo struct {
 	RawData  string `json:"raw_data,omitempty"`
 	TxValue  string `json:"tx_value,omitempty"`
 	TxHeight int32  `json:"tx_height,omitempty"`
+	Gas      *Gas   `json:"gas,omitempty"`
+}
+
+type Gas struct {
+	GasPrice string `json:"gas_price,omitempty"`
+	GasLimit uint64 `json:"gas_limit,omitempty"`
+	GasUsed  uint64 `json:"gas_used,omitempty"`
 }

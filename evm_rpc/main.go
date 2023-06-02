@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 var (
@@ -25,9 +26,11 @@ func main() {
 			return
 		}
 
-		//w.Header().Set("Access-Control-Allow-Origin", "*")             //允许访问所有域
-		//w.Header().Add("Access-Control-Allow-Headers", "Content-Type") //header的类型
-		//w.Header().Set("content-type", "application/json")             //返回数据格式是json
+		if strings.Contains(sdkconfig.RpcUrl, "127.0.0.1") {
+			w.Header().Set("Access-Control-Allow-Origin", "*")             //允许访问所有域
+			w.Header().Add("Access-Control-Allow-Headers", "Content-Type") //header的类型
+			w.Header().Set("content-type", "application/json")             //返回数据格式是json
+		}
 
 		// 读取以太坊JSON-RPC请求
 		body, err := io.ReadAll(r.Body)
