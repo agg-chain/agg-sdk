@@ -53,7 +53,7 @@ func Transfer(privateKey *ecdsa.PrivateKey, toAddress *common.Address, value *bi
 	}
 
 	gasLimit := uint64(21000) // in units
-	gasPrice := big.NewInt(20000)
+	gasPrice := big.NewInt(1 * 1e10)
 
 	tx := types.NewTx(&types.LegacyTx{
 		Nonce:    nonce,

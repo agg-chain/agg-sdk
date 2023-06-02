@@ -48,7 +48,8 @@ func main() {
 		println("Request method: " + request.Method)
 		switch request.Method {
 		case "eth_gasPrice":
-			resultHexForEvm = "0x0"
+			// 1e10
+			resultHexForEvm = "0x2540be400"
 		case "eth_blockNumber":
 			resultHexForEvm = "0x0"
 		case "eth_getBlockByNumber":
