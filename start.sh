@@ -1,0 +1,1 @@
+nohup ./tendermint_evm_rpc > tendermint_evm_rpc.log 2>&1 &
